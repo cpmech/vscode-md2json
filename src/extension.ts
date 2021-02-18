@@ -1,6 +1,7 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from "vscode";
+import * as ws from "ws";
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -9,8 +10,17 @@ export function activate(context: vscode.ExtensionContext) {
   // This line of code will only be executed once when your extension is activated
   console.log('Congratulations, your extension "md2json" is now active!');
 
-  vscode.workspace.onDidSaveTextDocument(() => {
-    console.log(">>> onDidSaveTextDocument");
+  vscode.workspace.onDidSaveTextDocument((e) => {
+    const client = new ws("ws://localhost:4444");
+    client.on("open", () => {
+      client.send(
+        JSON.stringify({
+          isPresentation: true,
+          filename: e.fileName,
+          text: e.getText(),
+        })
+      );
+    });
   });
 
   // The command has been defined in the package.json file
