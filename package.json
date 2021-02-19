@@ -2,6 +2,8 @@
   "name": "md2json",
   "displayName": "md2json",
   "description": "Convert md file into json data",
+  "publisher": "cpmech",
+  "repository": "cpmech/nada",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.53.0"
@@ -30,7 +32,8 @@
     "eslint": "eslint",
     "lint": "eslint src --ext ts",
     "integ": "node ./out/test/runTest.js",
-    "test": "echo \"no tests yet\""
+    "test": "echo \"no tests yet\"",
+    "pkg": "vsce package"
   },
   "devDependencies": {
     "@types/glob": "^7.1.3",
@@ -47,6 +50,7 @@
     "vscode-test": "^1.5.0"
   },
   "dependencies": {
+    "utf-8-validate": "^5.0.4",
     "ws": "^7.4.3"
   }
 }
