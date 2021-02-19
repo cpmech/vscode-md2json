@@ -33,7 +33,8 @@
     "lint": "eslint src --ext ts",
     "integ": "node ./out/test/runTest.js",
     "test": "echo \"no tests yet\"",
-    "pkg": "vsce package"
+    "pkg": "vsce package",
+    "add2code": "code --install-extension md2json-0.0.1.vsix"
   },
   "devDependencies": {
     "@types/glob": "^7.1.3",
