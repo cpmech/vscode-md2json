@@ -10,14 +10,14 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:md2json.helloWorld"
+    "onCommand:md2json.connect"
   ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "md2json.helloWorld",
-        "title": "Hello World"
+        "command": "md2json.connect",
+        "title": "md2json: Connect to backend"
       }
     ]
   },
@@ -26,6 +26,8 @@
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
     "pretest": "npm run compile && npm run lint",
+    "tsc": "tsc",
+    "eslint": "eslint",
     "lint": "eslint src --ext ts",
     "integ": "node ./out/test/runTest.js",
     "test": "echo \"no tests yet\""
