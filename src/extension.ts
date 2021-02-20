@@ -11,6 +11,10 @@ export function activate(context: vscode.ExtensionContext) {
   console.log('Congratulations, your extension "md2json" is now active!');
 
   vscode.workspace.onDidSaveTextDocument((e) => {
+    if (!e.fileName.endsWith(".md")) {
+      console.log("skip ", e.fileName);
+      return;
+    }
     const client = new ws("ws://localhost:4444");
     client.on("open", () => {
       client.send(
