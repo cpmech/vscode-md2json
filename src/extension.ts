@@ -8,23 +8,28 @@ import * as ws from "ws";
 export function activate(context: vscode.ExtensionContext) {
   // Use the console to output diagnostic information (console.log) and errors (console.error)
   // This line of code will only be executed once when your extension is activated
-  console.log('Congratulations, your extension "md2json" is now active!');
+  // console.log('Congratulations, your extension "md2json" is now active!');
 
+  // connect
+  const wss = new ws("ws://localhost:4444");
+  wss.onopen = (_) => {
+    wss.send(
+      JSON.stringify({ isGreetings: true, message: "Hello from VS Code" })
+    );
+  };
+
+  // send json
   vscode.workspace.onDidSaveTextDocument((e) => {
     if (!e.fileName.endsWith(".md")) {
       console.log("skip ", e.fileName);
       return;
     }
-    const client = new ws("ws://localhost:4444");
-    client.on("open", () => {
-      client.send(
-        JSON.stringify({
-          isPresentation: true,
-          filename: e.fileName,
-          text: e.getText(),
-        })
-      );
-    });
+    wss.send(
+      JSON.stringify({
+        filename: e.fileName,
+        text: e.getText(),
+      })
+    );
   });
 
   // The command has been defined in the package.json file
